@@ -1,8 +1,9 @@
+
+setuptools
 whisper
-pyttsx3
-subprocess
-speech_recognition
 torch
-numpy
+pyttsx3
+speechrecognition
 soundfile
 librosa
+subprocess
