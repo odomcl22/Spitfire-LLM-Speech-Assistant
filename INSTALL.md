@@ -51,7 +51,7 @@
    ```bash
    python3.11 pyttsx3_main.py
    ```
-7. ** If you encounter SSL certificate errors, especially on macOS, update your certificates by running:
+7. **If you encounter SSL certificate errors, especially on macOS, update your certificates by running:**
    ```bash
    /Applications/Python\\ 3.11/Install\\ Certificates.command
    ```
@@ -72,8 +72,8 @@
    ```
 
 ## Troubleshooting:
-- **If you encounter issues with audio dependencies on macOS, ensure that portaudio is installed via Homebrew.**
-- **SSL certificate issues can often be resolved by updating certificates as shown above.**
+- If you encounter issues with audio dependencies on macOS, ensure that **portaudio** is installed via Homebrew.
+- **SSL certificate** issues can often be resolved by updating certificates as shown above.
 
 ## Additional Information
 - **Note for macOS**: You must install the Xcode Command Line Tools to ensure `PyAudio` can build correctly.
