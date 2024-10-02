@@ -1,71 +1,84 @@
-
 # Installation Instructions for Spitfire LMM Speech Assistant
 
 ## Prerequisites:
-1. **Install Python 3.11** or higher. 
-    - Download Python from: https://www.python.org/downloads/
-    - Alternatively, for command line installation (macOS/Linux), use:
+1. Install **Python 3.11** (if not already installed).
+    - You can download Python 3.11 from the official [Python website](https://www.python.org/downloads/release/python-311/).
+    - **For macOS/Linux:** Use the following command to verify if Python 3.11 is installed and available:
       ```bash
-      brew install python@3.11
+      python3.11 --version
       ```
-      For Windows, you can install it from the official website or use `choco` (if Chocolatey is installed):
+    - **For Windows:** Ensure Python 3.11 is added to the `PATH` during installation.
+
+2. Ensure `pip` is installed:
+   - `pip` comes pre-installed with Python 3.11. To verify:
       ```bash
-      choco install python --version 3.11.5
+      python3.11 -m pip --version
       ```
 
-2. Make sure you have `pip` installed, which comes with Python.
+## Creating a Virtual Environment (Optional but Recommended)
+1. Create a virtual environment using Python 3.11:
+   ```bash
+   python3.11 -m venv spitfire_env
+   ```
 
-## Installation on macOS:
-1. Clone the repository to your local machine.
-2. Navigate to the project directory in the terminal.
-3. Run the following commands to install dependencies:
+2. Activate the virtual environment:
+   - **macOS/Linux:**
+     ```bash
+     source spitfire_env/bin/activate
+     ```
+   - **Windows:**
+     ```bash
+     .\spitfire_env\Scriptsctivate
+     ```
 
-    ```bash
-    pip install -r requirements.txt
-    python setup.py install
-    ```
+## Installation
 
-4. Ensure that Whisper and the LLaMA model are installed:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/Spitfire-LMM-Speech-Assistant.git
+   cd Spitfire-LMM-Speech-Assistant
+   ```
 
-    ```bash
-    pip install whisper
-    pip install torch
-    ```
+2. **Install dependencies**:
+   - Ensure you are in the Python 3.11 environment (e.g., virtual environment).
+   - Run the following command to install all required dependencies from `requirements.txt`:
+     ```bash
+     python3.11 -m pip install -r requirements.txt
+     ```
 
-5. For macOS-specific dependencies (e.g., pyobjc):
+3. **Ensure additional dependencies (Whisper, pyttsx3, etc.) are installed**:
+   - **For Whisper and Torch**:
+     ```bash
+     python3.11 -m pip install whisper torch
+     ```
+   - **For macOS-specific dependencies (e.g., pyobjc)**:
+     ```bash
+     python3.11 -m pip install pyobjc
+     ```
 
-    ```bash
-    pip install pyobjc
-    ```
+## OLLAMA Installation (for using LLaMA models)
+1. Install OLLAMA from the official website: [OLLAMA Download](https://ollama.com/download).
+2. After installation, ensure the `ollama` command-line tool is available:
+   ```bash
+   ollama --version
+   ```
 
-## Installation on Windows:
-1. Make sure Python 3.11 or higher is installed.
-2. Install required libraries using pip:
-    ```bash
-    pip install -r requirements.txt
-    python setup.py install
-    ```
+## Running the App
 
-3. Ensure that Whisper and pyttsx3 dependencies are installed:
-    ```bash
-    pip install whisper
-    pip install pyttsx3
-    ```
+1. **Run the main script**:
+   - Once all dependencies are installed, run the application using the following command:
+     ```bash
+     python3.11 pyttsx3_main.py
+     ```
 
-## OLLAMA and LLaMA Model Setup
-1. You must install OLLAMA by visiting the [OLLAMA website](https://ollama.com/download). Follow the instructions there for your operating system.
-2. To change the model in the `pyttsx3_model_integration.py`, modify the model command line in the following line:
-
-    ```python
-    command = f"ollama run llama3.2:1b  "{prompt_text}""
-    ```
-
-3. Once you run the code for the first time, the model will be downloaded. It may be slower initially, but will be faster on subsequent runs.
-
-## Running the App:
-Once everything is installed, you can run the app using:
-    ```bash
-    python pyttsx3_main.py
-    ```
-
-This will launch the speech-to-text and text-to-speech application.
+2. **Model download and usage**:
+   - The first time you run the app, it may take time as models are downloaded (e.g., LLaMA).
+   - You can modify the LLaMA model being used by updating the model call in the `pyttsx3_model_integration.py` file. Look for the line:
+     ```python
+     command = f"ollama run llama3.2:1b  "{prompt_text}""
+     ```
+     You can change the model by replacing `llama3.2:1b` with the appropriate model ID.
+   
+## Notes
+- **Whisper** will handle real-time audio processing, and **pyttsx3** will handle text-to-speech conversion.
+- On first use, the app may be slower while models are downloaded, but subsequent use will be faster.
