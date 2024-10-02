@@ -16,3 +16,6 @@ Once installed, the assistant will listen for your speech and respond intelligen
 
 ## Release Notes
 Check the [Release 1 Notes](./RELEASE_1_NOTES.md) for details about the latest changes and improvements.
+
+## Demo 
+https://youtu.be/TnUssazEWjY
