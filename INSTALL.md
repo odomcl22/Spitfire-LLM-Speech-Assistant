@@ -1,84 +1,93 @@
+
 # Installation Instructions for Spitfire LMM Speech Assistant
 
 ## Prerequisites:
-1. Install **Python 3.11** (if not already installed).
-    - You can download Python 3.11 from the official [Python website](https://www.python.org/downloads/release/python-311/).
-    - **For macOS/Linux:** Use the following command to verify if Python 3.11 is installed and available:
-      ```bash
-      python3.11 --version
-      ```
-    - **For Windows:** Ensure Python 3.11 is added to the `PATH` during installation.
+- Ensure **Python 3.11** is installed on your machine.
+- Install Homebrew on macOS, as it will be needed to install certain dependencies.
 
-2. Ensure `pip` is installed:
-   - `pip` comes pre-installed with Python 3.11. To verify:
-      ```bash
-      python3.11 -m pip --version
-      ```
-
-## Creating a Virtual Environment (Optional but Recommended)
-1. Create a virtual environment using Python 3.11:
-   ```bash
-   python3.11 -m venv spitfire_env
+## Homebrew Installation (macOS):
+1. **If Homebrew is not installed, you can install it by running the following command in your terminal:**
+- Run this command in your terminal:
+   ```bash 
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+2. **After installation, ensure Homebrew is in your PATH:**
+- Run this command in your terminal:
+   ```bash 
+   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
    ```
 
-2. Activate the virtual environment:
-   - **macOS/Linux:**
+3. **Use Homebrew to install portaudio, which is required for PyAudio:**
+   ```bash 
+   brew install portaudio
+   ```
+### Installing Python 3.11:
+1. **Download and install Python 3.11 from the [official website](https://www.python.org/downloads/).**
+   - Ensure Python 3.11 is added to your system's PATH.
+   - Verify the installation by running the following command:
      ```bash
-     source spitfire_env/bin/activate
-     ```
-   - **Windows:**
-     ```bash
-     .\spitfire_env\Scriptsctivate
+     python3.11 --version
      ```
 
-## Installation
+## macOS Instructions
 
-1. **Clone the repository**:
+1. **Install Python 3.11** (if not already installed) by downloading it from the [official website](https://www.python.org/downloads/).
+2. **Install Xcode Command Line Tools** (required for `PyAudio`):
+   - Run this command in your terminal:
+     ```bash
+     xcode-select --install
+     ```
+3. **Clone the repository** and navigate to the project folder.
+4. **Install required dependencies**:
    ```bash
-   git clone https://github.com/yourusername/Spitfire-LMM-Speech-Assistant.git
-   cd Spitfire-LMM-Speech-Assistant
+   python3.11 -m pip install -r requirements.txt
+   ```
+5. **Install `PyAudio` manually** (if needed):
+   ```bash
+   python3.11 -m pip install pyaudio
+   ```
+6. **Run the app**:
+   ```bash
+   python3.11 pyttsx3_main.py
+   ```
+7. ** If you encounter SSL certificate errors, especially on macOS, update your certificates by running:
+   ```bash
+   /Applications/Python\\ 3.11/Install\\ Certificates.command
+   ```
+## Windows Instructions
+
+1. **Install Python 3.11** (if not already installed) from the [official website](https://www.python.org/downloads/).
+2. **Install required dependencies**:
+   ```bash
+   python3.11 -m pip install -r requirements.txt
+   ```
+3. **Install `PyAudio`** (for Windows):
+   ```bash
+   python3.11 -m pip install pyaudio
+   ```
+4. **Run the app**:
+   ```bash
+   python3.11 pyttsx3_main.py
    ```
 
-2. **Install dependencies**:
-   - Ensure you are in the Python 3.11 environment (e.g., virtual environment).
-   - Run the following command to install all required dependencies from `requirements.txt`:
-     ```bash
-     python3.11 -m pip install -r requirements.txt
-     ```
+## Troubleshooting:
+- **If you encounter issues with audio dependencies on macOS, ensure that portaudio is installed via Homebrew.**
+- **SSL certificate issues can often be resolved by updating certificates as shown above.**
 
-3. **Ensure additional dependencies (Whisper, pyttsx3, etc.) are installed**:
-   - **For Whisper and Torch**:
-     ```bash
-     python3.11 -m pip install whisper torch
-     ```
-   - **For macOS-specific dependencies (e.g., pyobjc)**:
-     ```bash
-     python3.11 -m pip install pyobjc
-     ```
+## Additional Information
+- **Note for macOS**: You must install the Xcode Command Line Tools to ensure `PyAudio` can build correctly.
+- **Note for Windows**: `PyAudio` should install directly from pip without additional dependencies.
 
-## OLLAMA Installation (for using LLaMA models)
-1. Install OLLAMA from the official website: [OLLAMA Download](https://ollama.com/download).
-2. After installation, ensure the `ollama` command-line tool is available:
+## Model Configuration (Ollama):
+- The application uses the `Ollama` model for language processing.
+- Ensure Ollama is installed by visiting [Ollama](https://ollama.com).
+- You can configure the model by modifying the `process_text_with_llm` function in the `pyttsx3_main.py` file.
+
+## Audio Recognition Timeout
+
+- By default, the audio recognizer in the application times out after 2 seconds of silence. If you want to extend this timeout, you can adjust it in the pyttsx3_main.py file under the capture_speech() function. Look for the following line:
    ```bash
-   ollama --version
+   audio = recognizer.listen(source, timeout=2, phrase_time_limit=15)
    ```
-
-## Running the App
-
-1. **Run the main script**:
-   - Once all dependencies are installed, run the application using the following command:
-     ```bash
-     python3.11 pyttsx3_main.py
-     ```
-
-2. **Model download and usage**:
-   - The first time you run the app, it may take time as models are downloaded (e.g., LLaMA).
-   - You can modify the LLaMA model being used by updating the model call in the `pyttsx3_model_integration.py` file. Look for the line:
-     ```python
-     command = f"ollama run llama3.2:1b  "{prompt_text}""
-     ```
-     You can change the model by replacing `llama3.2:1b` with the appropriate model ID.
-   
-## Notes
-- **Whisper** will handle real-time audio processing, and **pyttsx3** will handle text-to-speech conversion.
-- On first use, the app may be slower while models are downloaded, but subsequent use will be faster.
+- If you would like to increase the timeout, modify the listen method’s timeout parameter to your desired value (default is set to 5 seconds).
