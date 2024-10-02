@@ -1,10 +1,7 @@
-
+subprocess
+pyttsx3
 torch
 whisper
-pyttsx3
-pyobjc; platform_system == "Darwin"
-setuptools
-ollama
-speechrecognition
-soundfile
-librosa
+speech_recognition
+threading
+pyaudio
