@@ -1,9 +1,10 @@
 
-setuptools
-whisper
 torch
+whisper
 pyttsx3
+pyobjc; platform_system == "Darwin"
+setuptools
+ollama
 speechrecognition
 soundfile
 librosa
-subprocess
