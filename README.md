@@ -20,7 +20,7 @@ Once installed, the assistant will listen for your speech and respond intelligen
 - You can check the [Release 2 Notes](./RELEASE_2_NOTES.md) for details about the latest changes and improvements.
 
 ## Demo
-A demo video is available to showcase the AI Speech Assistant in action. Check it out on [YouTube] (https://www.youtube.com/watch?v=TnUssazEWjY&t=9s).
+A demo video is available to showcase the AI Speech Assistant in action. Check it out on [YouTube](https://www.youtube.com/watch?v=TnUssazEWjY&t=9s).
 
 ## Future Enhancements
 Looking forward, future releases will focus on integrating a more advanced model backend and adding more voice customization options.
