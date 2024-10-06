@@ -1,0 +1,52 @@
+
+# Installation Instructions for AI Speech App
+
+## Prerequisites:
+1. Install Python 3.11 or higher.
+2. Make sure you have `pip` installed.
+
+## Installation on macOS:
+1. Clone the repository to your local machine.
+2. Navigate to the project directory in the terminal.
+3. Run the following commands:
+
+```
+pip install -r requirements.txt
+python setup.py install
+```
+
+4. Ensure that the Whisper and LLaMA models are installed (if using external models like Whisper, run the following commands):
+```
+pip install whisper
+pip install torch
+```
+
+5. For macOS-specific dependencies (e.g., pyobjc):
+```
+pip install pyobjc
+```
+
+## Installation on Windows:
+1. Make sure Python 3.11 or higher is installed.
+2. Install required libraries using pip:
+```
+pip install -r requirements.txt
+python setup.py install
+```
+
+3. Ensure that Whisper and pyttsx3 dependencies are installed:
+```
+pip install whisper
+pip install pyttsx3
+```
+
+4. For Windows, make sure additional dependencies like `whisper`, `torch`, and any text-to-speech models are properly installed.
+
+## Running the App:
+Once everything is installed, you can run the app using:
+```
+python pyttsx3_main.py
+```
+
+This will launch the application with the speech-to-text and text-to-speech functionality.
+

@@ -1,27 +1,28 @@
-# from gtts import gTTS
-# import os
+import pyttsx3
 
-# def speak_text(text):
-#     # Debugging: Print the model output. Disabled line below for production by putting # in front of code.
-#     #print(f"Model Output: {text}")
-    
-#     # Check if the text is empty and provide a default response
-#     if not text:
-#         text = "Sorry, I didn't catch that."
-    
-#     # Convert text to speech using gTTS
-#     tts = gTTS(text=text, lang='en')
-#     tts.save("output.mp3")
-    
-#     # Play the generated speech audio on macOS
-#     os.system("afplay output.mp3")
+# Initialize pyttsx3 engine
+engine = pyttsx3.init()
 
-import pyttsx3  # Import pyttsx3 for text-to-speech functionality
+# Fetch available voices
+voices = engine.getProperty('voices')
 
+# Set default to Alex (voice selection for macOS)
+for voice in voices:
+    if "Alex" in voice.name:
+        engine.setProperty('voice', voice.id)
+        break
+else:
+    print("Alex voice not found. Using default voice.")
+
+# Set voice properties
+engine.setProperty('rate', 160)  # Conversational rate between 150-175 WPM
+engine.setProperty('volume', 0.9)  # Volume level (0.0 to 1.0)
+
+# Text-to-speech function (speak the provided text)
 def speak_text(text):
-    try:
-        engine = pyttsx3.init(driverName='nsss')  # Initialize the pyttsx3 engine with the macOS 'nsss' driver
-        engine.say(text)  # Queue the text to be spoken
-        engine.runAndWait()  # Blocks while processing all currently queued commands
-    except Exception as e:
-        print(f"An error occurred during TTS: {e}")
+    engine.say(text)
+    engine.runAndWait()
+
+# Example usage: speak some text
+if __name__ == "__main__":
+    speak_text("Hello, this is Alex speaking at a conversational speed.")
